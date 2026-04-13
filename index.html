@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Animated background -->
+  <div id="bg-animation">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="main-nav">
+    <div class="nav-logo" data-view="dashboard">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="28" height="28">
+        <path d="M3 17l4-4 4 4 8-8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M17 9h4v4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Trading Academy</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link active" data-view="dashboard">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        Dashboard
+      </a>
+      <a class="nav-link" data-view="learn">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        Learn
+      </a>
+      <a class="nav-link" data-view="simulator">
+        <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M7 14l3-3 3 3 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        Simulator
+      </a>
+    </div>
+    <div class="nav-progress-wrap">
+      <svg class="progress-ring" width="36" height="36">
+        <circle class="progress-ring-bg" cx="18" cy="18" r="15" stroke-width="3" fill="none"/>
+        <circle class="progress-ring-fill" cx="18" cy="18" r="15" stroke-width="3" fill="none" stroke-dasharray="94.25" stroke-dashoffset="94.25"/>
+      </svg>
+      <span class="progress-ring-text">0%</span>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main id="app">
+
+    <!-- ===== DASHBOARD VIEW ===== -->
+    <section id="view-dashboard" class="view active">
+      <div class="dashboard-container">
+        <div class="hero-section">
+          <div class="hero-content">
+            <h1 class="hero-title">Master the <span class="gradient-text">Markets</span></h1>
+            <p class="hero-subtitle">Your journey from beginner to expert day trader starts here</p>
+            <button class="btn btn-primary btn-glow" id="hero-cta">Continue Learning</button>
+          </div>
+          <div class="hero-chart" id="hero-chart-canvas">
+            <!-- Mini animated chart drawn by JS -->
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-lessons">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-lessons">0/0</span>
+              <span class="stat-label">Lessons Complete</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-level">
+              <svg viewBox="0 0 24 24" width="24" height="24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-level">Beginner</span>
+              <span class="stat-label">Current Level</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-streak">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-streak">0</span>
+              <span class="stat-label">Day Streak</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-sim">
+              <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-winrate">0%</span>
+              <span class="stat-label">Sim Win Rate</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-sections">
+          <div class="section-card continue-card" id="continue-section">
+            <h3>Continue Where You Left Off</h3>
+            <div id="continue-content">
+              <p class="muted">Start your first lesson to track progress</p>
+            </div>
+          </div>
+          <div class="section-card levels-preview">
+            <h3>Your Progress</h3>
+            <div class="level-progress-bars" id="level-progress-bars">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LEARN VIEW (Level Selection) ===== -->
+    <section id="view-learn" class="view">
+      <div class="learn-container">
+        <div class="section-header">
+          <h2>Choose Your <span class="gradient-text">Path</span></h2>
+          <p>Select a difficulty level to begin your training</p>
+        </div>
+        <div class="levels-grid" id="levels-grid">
+          <!-- Filled by JS - 4 level cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LEVEL VIEW (Lesson List) ===== -->
+    <section id="view-level" class="view">
+      <div class="level-container">
+        <button class="btn-back" id="btn-back-learn">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to Levels
+        </button>
+        <div class="level-header" id="level-header">
+          <!-- Filled by JS -->
+        </div>
+        <div class="lessons-list" id="lessons-list">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LESSON VIEW ===== -->
+    <section id="view-lesson" class="view">
+      <div class="lesson-container">
+        <div class="lesson-top-bar">
+          <button class="btn-back" id="btn-back-level">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to Lessons
+          </button>
+          <div class="lesson-progress-bar">
+            <div class="lesson-progress-fill" id="lesson-progress-fill"></div>
+          </div>
+        </div>
+        <div class="lesson-body" id="lesson-body">
+          <!-- Filled by JS - sections rendered here -->
+        </div>
+        <div class="lesson-footer">
+          <button class="btn btn-secondary" id="btn-prev-section" disabled>Previous</button>
+          <span class="section-counter" id="section-counter">1 / 1</span>
+          <button class="btn btn-primary" id="btn-next-section">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== QUIZ VIEW ===== -->
+    <section id="view-quiz" class="view">
+      <div class="quiz-container">
+        <div class="quiz-header">
+          <h2 id="quiz-title">Quiz</h2>
+          <div class="quiz-score-display">
+            <span id="quiz-progress">1/5</span>
+          </div>
+        </div>
+        <div class="quiz-body" id="quiz-body">
+          <div class="quiz-question" id="quiz-question"></div>
+          <div class="quiz-options" id="quiz-options">
+            <!-- 4 option buttons filled by JS -->
+          </div>
+          <div class="quiz-feedback" id="quiz-feedback"></div>
+        </div>
+        <div class="quiz-footer">
+          <button class="btn btn-primary" id="btn-quiz-next" style="display:none">Next Question</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== QUIZ RESULTS VIEW ===== -->
+    <section id="view-quiz-results" class="view">
+      <div class="results-container">
+        <div class="results-circle" id="results-circle">
+          <svg viewBox="0 0 120 120" width="180" height="180">
+            <circle class="results-ring-bg" cx="60" cy="60" r="54" stroke-width="8" fill="none"/>
+            <circle class="results-ring-fill" cx="60" cy="60" r="54" stroke-width="8" fill="none" stroke-dasharray="339.29" stroke-dashoffset="339.29"/>
+          </svg>
+          <div class="results-score" id="results-score">0%</div>
+        </div>
+        <h2 id="results-message">Quiz Complete!</h2>
+        <p id="results-detail"></p>
+        <div class="results-actions">
+          <button class="btn btn-secondary" id="btn-retry-quiz">Retry Quiz</button>
+          <button class="btn btn-primary" id="btn-next-lesson">Next Lesson</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SIMULATOR VIEW (Game Selection) ===== -->
+    <section id="view-simulator" class="view">
+      <div class="simulator-container">
+        <div class="section-header">
+          <h2>Trading <span class="gradient-text">Simulator</span></h2>
+          <p>Test your skills with interactive market simulations</p>
+        </div>
+        <div class="sim-stats-row" id="sim-stats-row">
+          <div class="sim-stat">
+            <span class="sim-stat-value" id="sim-total-games">0</span>
+            <span class="sim-stat-label">Games Played</span>
+          </div>
+          <div class="sim-stat">
+            <span class="sim-stat-value" id="sim-overall-winrate">0%</span>
+            <span class="sim-stat-label">Win Rate</span>
+          </div>
+          <div class="sim-stat">
+            <span class="sim-stat-value" id="sim-best-streak">0</span>
+            <span class="sim-stat-label">Best Streak</span>
+          </div>
+        </div>
+        <div class="games-grid">
+          <div class="game-card" data-game="prediction">
+            <div class="game-card-icon prediction-icon">
+              <svg viewBox="0 0 48 48" width="48" height="48">
+                <path d="M6 36l10-12 8 6 12-18" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="42" cy="12" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Bull or Bear</h3>
+            <p>Predict if the market will go up or down based on candlestick patterns</p>
+            <div class="game-card-stats">
+              <span id="prediction-games">0 games</span>
+              <span id="prediction-winrate">0% win rate</span>
+            </div>
+            <button class="btn btn-primary btn-sm">Play Now</button>
+          </div>
+          <div class="game-card" data-game="pattern">
+            <div class="game-card-icon pattern-icon">
+              <svg viewBox="0 0 48 48" width="48" height="48">
+                <path d="M6 30l6-8 6 4 6-12 6 8 6-6 6 10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Pattern Spotter</h3>
+            <p>Identify chart patterns like head & shoulders, double tops, triangles, and more</p>
+            <div class="game-card-stats">
+              <span id="pattern-games">0 games</span>
+              <span id="pattern-winrate">0% win rate</span>
+            </div>
+            <button class="btn btn-primary btn-sm">Play Now</button>
+          </div>
+          <div class="game-card" data-game="risk">
+            <div class="game-card-icon risk-icon">
+              <svg viewBox="0 0 48 48" width="48" height="48">
+                <rect x="8" y="20" width="8" height="16" rx="1" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                <rect x="20" y="12" width="8" height="24" rx="1" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                <rect x="32" y="8" width="8" height="28" rx="1" stroke="currentColor" stroke-width="2.5" fill="none"/>
+              </svg>
+            </div>
+            <h3>Risk Manager</h3>
+            <p>Practice position sizing, stop-loss placement, and risk-to-reward calculations</p>
+            <div class="game-card-stats">
+              <span id="risk-games">0 games</span>
+              <span id="risk-winrate">0% win rate</span>
+            </div>
+            <button class="btn btn-primary btn-sm">Play Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PREDICTION GAME VIEW ===== -->
+    <section id="view-game-prediction" class="view">
+      <div class="game-container">
+        <div class="game-top-bar">
+          <button class="btn-back" id="btn-back-sim-pred">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <div class="game-info">
+            <span class="game-round" id="pred-round">Round 1/10</span>
+            <span class="game-score" id="pred-score">Score: 0</span>
+            <span class="game-streak" id="pred-streak"></span>
+          </div>
+        </div>
+        <div class="chart-area">
+          <canvas id="prediction-canvas" width="900" height="400"></canvas>
+        </div>
+        <div class="game-controls" id="pred-controls">
+          <button class="btn btn-bull" id="btn-bull">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bullish (Buy)
+          </button>
+          <button class="btn btn-bear" id="btn-bear">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bearish (Sell)
+          </button>
+        </div>
+        <div class="game-result-overlay" id="pred-result" style="display:none">
+          <div class="result-content">
+            <div class="result-icon" id="pred-result-icon"></div>
+            <h3 id="pred-result-text"></h3>
+            <p id="pred-result-detail"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PATTERN GAME VIEW ===== -->
+    <section id="view-game-pattern" class="view">
+      <div class="game-container">
+        <div class="game-top-bar">
+          <button class="btn-back" id="btn-back-sim-pattern">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <div class="game-info">
+            <span class="game-round" id="pattern-round">Round 1/10</span>
+            <span class="game-score" id="pattern-score">Score: 0</span>
+          </div>
+        </div>
+        <div class="chart-area">
+          <canvas id="pattern-canvas" width="900" height="400"></canvas>
+        </div>
+        <div class="pattern-options" id="pattern-options">
+          <!-- 4 pattern option buttons filled by JS -->
+        </div>
+        <div class="game-result-overlay" id="pattern-result" style="display:none">
+          <div class="result-content">
+            <div class="result-icon" id="pattern-result-icon"></div>
+            <h3 id="pattern-result-text"></h3>
+            <p id="pattern-result-detail"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RISK GAME VIEW ===== -->
+    <section id="view-game-risk" class="view">
+      <div class="game-container">
+        <div class="game-top-bar">
+          <button class="btn-back" id="btn-back-sim-risk">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back
+          </button>
+          <div class="game-info">
+            <span class="game-round" id="risk-round">Round 1/10</span>
+            <span class="game-score" id="risk-score">Score: 0</span>
+          </div>
+        </div>
+        <div class="risk-scenario" id="risk-scenario">
+          <!-- Filled by JS -->
+        </div>
+        <div class="risk-inputs">
+          <div class="risk-input-group">
+            <label>Position Size (shares)</label>
+            <input type="number" id="risk-position" min="1" placeholder="Enter position size">
+          </div>
+          <div class="risk-input-group">
+            <label>Stop Loss Price ($)</label>
+            <input type="number" id="risk-stoploss" step="0.01" placeholder="Enter stop loss">
+          </div>
+          <div class="risk-input-group">
+            <label>Take Profit Price ($)</label>
+            <input type="number" id="risk-takeprofit" step="0.01" placeholder="Enter take profit">
+          </div>
+        </div>
+        <button class="btn btn-primary" id="btn-risk-submit">Submit Answer</button>
+        <div class="game-result-overlay" id="risk-result" style="display:none">
+          <div class="result-content">
+            <div class="result-icon" id="risk-result-icon"></div>
+            <h3 id="risk-result-text"></h3>
+            <p id="risk-result-detail"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GAME OVER VIEW ===== -->
+    <section id="view-game-over" class="view">
+      <div class="results-container">
+        <div class="results-circle" id="game-results-circle">
+          <svg viewBox="0 0 120 120" width="180" height="180">
+            <circle class="results-ring-bg" cx="60" cy="60" r="54" stroke-width="8" fill="none"/>
+            <circle class="results-ring-fill game-results-ring" cx="60" cy="60" r="54" stroke-width="8" fill="none" stroke-dasharray="339.29" stroke-dashoffset="339.29"/>
+          </svg>
+          <div class="results-score" id="game-final-score">0%</div>
+        </div>
+        <h2 id="game-over-title">Game Over!</h2>
+        <p id="game-over-detail"></p>
+        <div class="results-actions">
+          <button class="btn btn-secondary" id="btn-play-again">Play Again</button>
+          <button class="btn btn-primary" id="btn-back-to-sims">All Games</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/content.js"></script>
+  <script src="js/progress.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
